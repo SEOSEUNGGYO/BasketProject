@@ -1,0 +1,27 @@
+.nav-item{
+	/*margin: 5px;*/
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+
+#wrap{
+	width: 100%;
+	margin: 0 auto;
+}
+#wrap #main{
+	width: 50%;
+	margin-top: 20px;
+	
+	
+}
+#wrap #row{
+	margin: 10px;
+	
+}
+#wrap #row #col{
+	margin:10px;
+	
+}
+
+
