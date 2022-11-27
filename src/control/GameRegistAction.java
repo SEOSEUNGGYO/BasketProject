@@ -8,9 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import game.GameDAO;
-import game.GameDTO;
 
 
 @SuppressWarnings("serial")
@@ -84,9 +84,12 @@ public class GameRegistAction extends HttpServlet {
 			return;
 		}
 		
+		String game_writer = null;
+		HttpSession session = request.getSession();
+		game_writer = (String)session.getAttribute("user_id");
 		GameDAO gameDAO = new GameDAO();
 		
-		int result = gameDAO.regist(game_region, game_date, game_time, game_rule, game_address, game_court, game_information);
+		int result = gameDAO.regist(game_region, game_date, game_time, game_rule, game_address, game_court, game_information, game_writer);
 		
 		
 		if(result==1) {

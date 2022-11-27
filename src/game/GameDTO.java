@@ -9,6 +9,8 @@ public class GameDTO {
 	private String game_address;
 	private String game_court;
 	private String game_information;
+	private int game_reservation;
+	private String game_writer;
 	public int getGame_id() {
 		return game_id;
 	}
@@ -57,8 +59,21 @@ public class GameDTO {
 	public void setGame_information(String game_information) {
 		this.game_information = game_information;
 	}
+
+	public int getGame_reservation() {
+		return game_reservation;
+	}
+	public void setGame_reservation(int game_reservation) {
+		this.game_reservation = game_reservation;
+	}
+	public String getGame_writer() {
+		return game_writer;
+	}
+	public void setGame_writer(String game_writer) {
+		this.game_writer = game_writer;
+	}
 	public GameDTO(int game_id, String game_region, String game_date, String game_time, String game_rule,
-			String game_address, String game_court, String game_information) {
+			String game_address, String game_court, String game_information, int game_reservation, String game_writer) {
 		this.game_id = game_id;
 		this.game_region = game_region;
 		this.game_date = game_date;
@@ -67,6 +82,8 @@ public class GameDTO {
 		this.game_address = game_address;
 		this.game_court = game_court;
 		this.game_information = game_information;
+		this.game_reservation = game_reservation;
+		this.game_writer = game_writer;
 	}
 	public GameDTO() {}
 	

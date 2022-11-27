@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,9 +72,10 @@
   	</div>
 </nav>
 
+
 <div class="wrap" id="wrap">
 	<div class="container-fluid" id="main">
-		<form action="gameListAction.do" method="post">
+		<form action="GameListAction.do" method="post">
 			<div class="row border" id="row">
 				<div class="col" id="col">
 					<label for="game_region" class="form-label">지역 선택</label>
@@ -104,6 +107,52 @@
     			</div>
     		</div>
    		</form>
+   		
+   		<c:forEach var="gameList" items="${gameList}">
+   			<form action="GameMatchAction.do" method="post">	
+   				<div class="row border" id="row">
+   					<div class="col" id="col">
+   						<label for="game_id" class="form-label">매치번호</label>
+   						<input type="text" class="form-control" name="game_id" id="game_id" placeholder="${gameList.game_id}" readonly>
+   					</div>
+   					<div class="col-12" id="col">
+   						<label for="game_region" class="form-label">지역</label>
+   						<p id="game_region">${gameList.game_region}</p>
+   					</div>
+   					<div class="col-12" id="col">
+   						<label for="game_date" class="form-label">날짜</label>
+   						<p id="game_date">${gameList.game_date}</p>
+   					</div>
+   					<div class="col-12" id="col">
+   						<label for="game_time" class="form-label">시간</label>
+   						<p id="game_time">${gameList.game_time}</p>
+   					</div>
+   					<div class="col-12" id="col">
+   						<label for="game_rule" class="form-label">방식</label>
+   						<p id="game_rule">${gameList.game_rule}</p>
+   					</div>
+   					<div class="col-12" id="col">			
+   						<label for="game_address" class="form-label">주소</label>
+   						<p id="game_address">${gameList.game_address}</p>
+   					</div>
+   					<div class="col-12" id="col">
+   						<label for="game_court" class="form-label">코트</label>
+   						<p id="game_court">${gameList.game_court}</p>
+   					</div>
+   					<div class="col-12" id="col">
+   						<label for="game_information" class="form-label">기타</label>
+   						<p id="game_information">${gameList.game_information}</p>
+   					</div>
+   					<div class="col-12" id="col">
+   						<label for="game_writer" class="form-label">작성자</label>
+   						<p id="game_writer">${gameList.game_writer}</p>
+   					</div>
+   					<div class="col-12" id="col">
+   						<button type="submit" class="btn btn-outline-primary btn-lg btn-block">참여</button>
+   					</div>
+   				</div>	
+   			</form>
+   		</c:forEach>
 	</div>		
 </div>
 		
