@@ -37,12 +37,10 @@ public class GameDAO {
 	}
 	//전체 게임 등록 수
 	public int getGameCount(String game_region, String game_date) {
-		String SQL = "select count(*) from game where game_region=? and game_date=?";
+		String SQL = "select count(*) from game where game_region=? and game_date=? and game_reservation=0";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		
 		try {
 			conn = DatabaseUtil.getConnection();
 			pstmt=conn.prepareStatement(SQL);
@@ -66,6 +64,7 @@ public class GameDAO {
 		return -1;
 		
 	}
+	
 	//game 글 등록
 	public int regist(String game_region,String game_date, String game_time, String game_rule, String game_address, String game_court, String game_information, String game_writer) {
 		String SQL = "INSERT INTO game VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -99,10 +98,10 @@ public class GameDAO {
 		return -1;
 	}
 	
-	
+	//game list
 	public ArrayList<GameDTO> getgGmeList(String game_region, String game_date, int start, int end){
 		ArrayList<GameDTO> list = new ArrayList<GameDTO>();
-		String SQL = "SELECT * FROM game where game_region=? and game_date=? limit ?,?";
+		String SQL = "SELECT * FROM game where game_reservation not in(1) and game_region=? and game_date=? limit ?,?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -127,9 +126,6 @@ public class GameDAO {
 				gameDTO.setGame_writer(rs.getString("game_writer"));
 				list.add(gameDTO);
 			}
-			
-			
-			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -140,4 +136,31 @@ public class GameDAO {
 		
 		return list;
 	}
+	public int matchUpdate(int game_id) {
+		String SQL = "UPDATE game SET game_reservation=? where game_id=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn=DatabaseUtil.getConnection();
+			pstmt=conn.prepareStatement(SQL);
+			
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, game_id);
+			 
+			
+			return pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {if(conn!=null) conn.close();}catch(Exception e) {e.printStackTrace();}
+			try {if(pstmt!=null) pstmt.close();}catch(Exception e) {e.printStackTrace();}
+			try {if(rs!=null) rs.close();}catch(Exception e) {e.printStackTrace();}
+		}
+		
+		return -1;
+	}
+	
+	
 }

@@ -84,13 +84,19 @@ public class GameRegistAction extends HttpServlet {
 			return;
 		}
 		
+		
 		String game_writer = null;
 		HttpSession session = request.getSession();
 		game_writer = (String)session.getAttribute("user_id");
+		if(game_writer==null || game_writer.equals("")) {
+			RequestDispatcher dis = request.getRequestDispatcher("/login.jsp");
+			dis.forward(request, response);
+			return;
+		}
 		GameDAO gameDAO = new GameDAO();
 		
 		int result = gameDAO.regist(game_region, game_date, game_time, game_rule, game_address, game_court, game_information, game_writer);
-		
+		System.out.println(result);
 		
 		if(result==1) {
 			request.setAttribute("msg","등록이 완료되었습니다. 리스트를 확인하세요!");

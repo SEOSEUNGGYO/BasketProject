@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import game.GameDAO;
 import game.GameDTO;
@@ -31,8 +32,19 @@ public class GameListAction extends HttpServlet {
 	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		String game_region= request.getParameter("game_region");
+		HttpSession session = request.getSession();
+		
+		String game_region = request.getParameter("game_region");
 		String game_date = request.getParameter("game_date");
+		
+		session.setAttribute("game_region", game_region);
+		session.setAttribute("game_date", game_date);
+		
+		//String game_region = (String)session.getAttribute("game_region");
+		//String game_date = (String)session.getAttribute("game_date");
+		
+		
+		
 		if(game_region==null||game_region.equals("")) {
 			request.setAttribute("msg"," 입력하지않은 정보가 있습니다. ");
 			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameListError.jsp");
@@ -45,6 +57,9 @@ public class GameListAction extends HttpServlet {
 			dis.forward(request, response);
 			return;
 		}
+		
+		
+		
 		int pageSize=10;
 		
 		//현재 보여지고 있는 페이지의 넘버 값을 읽어드림 
@@ -74,7 +89,7 @@ public class GameListAction extends HttpServlet {
 		//최신글 10개를 기준으로 게시글 리턴 받아주는 메소드 호출 
 		ArrayList<GameDTO> gameList = gameDAO.getgGmeList(game_region, game_date, start, end);
 		number = count - (currentPage -1)*pageSize;
-		/////////////////////////////////////////수정 삭제시 비밀번호가 틀렸다면 
+		
 		String msg =request.getParameter("msg");
 		////////////////////////////////////////////BoardList.jsp쪽으로 request객체에 담아서 넘겨줌
 
@@ -84,9 +99,12 @@ public class GameListAction extends HttpServlet {
 		request.setAttribute("count", count);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("msg", msg);
-		RequestDispatcher dis = request.getRequestDispatcher("gameList.jsp");
-		dis.forward(request ,response);
 		
+		//System.out.println(count);
+		
+		RequestDispatcher dis = request.getRequestDispatcher("/gameList.jsp");
+		dis.forward(request, response);
+		return;
 	}
 
 }
