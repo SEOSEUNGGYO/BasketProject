@@ -162,5 +162,32 @@ public class GameDAO {
 		return -1;
 	}
 	
-	
+	public ArrayList<String> registCheck(String game_writer) {
+		ArrayList<String> list = new ArrayList<String>();
+		String SQL = "SELECT game_date FROM game WHERE game_writer=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DatabaseUtil.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			
+			pstmt.setString(1, game_writer);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				String game_date = rs.getString("game_date");
+				list.add(game_date);
+				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {if(conn!=null) conn.close();}catch(Exception e) {e.printStackTrace();}
+			try {if(pstmt!=null) pstmt.close();}catch(Exception e) {e.printStackTrace();}
+			try {if(rs!=null) rs.close();}catch(Exception e) {e.printStackTrace();}
+		}
+		return list;
+		
+	}
 }

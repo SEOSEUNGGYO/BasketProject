@@ -88,6 +88,11 @@ public class JoinAction extends HttpServlet {
 			RequestDispatcher dis = request.getRequestDispatcher("/soe/JoinSuccess.jsp");
 			dis.forward(request, response);
 			return;
+		}else {
+			request.setAttribute("msg","회원가입 실패!!");
+			RequestDispatcher dis = request.getRequestDispatcher("/soe/JoinError.jsp");
+			dis.forward(request, response);
+			return;
 		}
 		
 	}

@@ -109,24 +109,25 @@
    		</form>
    		
    		<c:forEach var="gameList" items="${gameList}">
-   			<form action="GameMatchAction.do" method="post">	
+   		<c:set var="game_region" value="${gameList.game_region}" />
+   		<c:set var="game_date" value="${gameList.game_date}" />
+   			<form action="GameJoinAction.do" method="post">	
    				<div class="row border" id="row">
    					<div class="col" id="col">
    						<label for="game_id" class="form-label">매치번호</label>
-   						<input type="text" class="form-control" name="game_id" id="game_id" placeholder="${gameList.game_id}" readonly>
+   						<input type="text" class="form-control" name="game_id" id="game_id" value="${gameList.game_id}" readonly>
    					</div>
    					<div class="col-12" id="col">
    						<label for="game_region" class="form-label">지역</label>
-   						<p id="game_region">${gameList.game_region}</p>
+   						<input type="text" class="form-control" name="game_region" id="game_region" value="${gameList.game_region}" readonly>
    					</div>
    					<div class="col-12" id="col">
    						<label for="game_date" class="form-label">날짜</label>
-   						<p id="game_date">${gameList.game_date}</p>
+   						<input type="text" class="form-control" name="game_date" id="game_date" value="${gameList.game_date}" readonly>
    					</div>
    					<div class="col-12" id="col">
    						<label for="game_time" class="form-label">시간</label>
-   						<p id="game_time">${gameList.game_time}</p>
-   					</div>
+						<input type="text" class="form-control" name="game_time" id="game_time" value="${gameList.game_time}" readonly>   					</div>
    					<div class="col-12" id="col">
    						<label for="game_rule" class="form-label">방식</label>
    						<p id="game_rule">${gameList.game_rule}</p>
@@ -145,7 +146,7 @@
    					</div>
    					<div class="col-12" id="col">
    						<label for="game_writer" class="form-label">작성자</label>
-   						<p id="game_writer">${gameList.game_writer}</p>
+   						<input type="text" class="form-control" name="game_writer" id="game_writer" value="${gameList.game_writer}" readonly>
    					</div>
    					<div class="col-12" id="col">
    						<button type="submit" class="btn btn-outline-primary btn-lg btn-block">참여</button>
@@ -153,6 +154,45 @@
    				</div>	
    			</form>
    		</c:forEach>
+   		<!-- 페이지 카운터링 소스 작성  -->
+		<c:if test="${count>0}">
+			<c:set var="pageCount" value="${count /pageSize + (count%pageSize == 0 ? 0 : 1 )}" />
+			<c:set var="startPage" value="${1}" />
+			
+			<c:if test="${currentPage%10 != 0}">
+				<!--결과를 정수형으로 리턴 받아야 하기에 fmt  -->
+				<fmt:parseNumber var="result" value="${currentPage/10}" integerOnly="true"/>
+				<c:set var="startPage" value="${result*10+1}" />
+			</c:if>
+			
+			<c:if test="${currentPage%10 == 0}">
+				<!--결과를 정수형으로 리턴 받아야 하기에 fmt  -->
+				<c:set var="startPage" value="${(result-1)*10+1}" />
+			</c:if>
+			
+			<!-- 화면에 보여질 페이지 처리 숫자를 표현 -->
+			<c:set var="pageBlock" value="${10}" />
+			<c:set var="endPage" value="${startPage+pageBlock-1}" />
+			
+			<c:if test="${endPage > pageCount}">
+				<c:set var="endPage" value="${pageCount}" />
+			</c:if>
+			
+			<!--이전 링크를 결지 파악 -->
+			<c:if test="${startPage > 10}">
+				<<a href="GameListAction.do?pageNum=${startPage-10}">[이전]</a>
+			</c:if>
+			
+			<!-- 페이징 처리-->
+			<c:forEach var="i" begin="${startPage}" end="${endPage}">
+				<a href="GameListAction.do?pageNum=${i}&game_region=${game_region}&game_date=${game_date}" style ="text-decoration:none">[${i}]</a>
+			</c:forEach>
+			
+			<!-- 다음  -->
+			<c:if test="${endPage < pageCount}">
+				<a href="GameListAction.do?pageNum=${startPage+10}&game_region=${game_region}&game_date=${game_date}">[다음]</a>
+			</c:if>
+		</c:if>
 	</div>		
 </div>
 		

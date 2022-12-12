@@ -11,8 +11,8 @@ import util.DatabaseUtil;
 
 public class ScheduleDAO {
 	
-	public int match(int schedule_game, String schedule_writer, String schedule_opponent, String schedule_date, String schedule_time) {
-		String SQL = "INSERT INTO schedule VALUES(?,?,?,?,?)";
+	public int match(int schedule_game, String schedule_writer, String schedule_opponent) {
+		String SQL = "INSERT INTO schedule VALUES(?,?,?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -24,8 +24,7 @@ public class ScheduleDAO {
 			pstmt.setInt(1, schedule_game);
 			pstmt.setString(2, schedule_writer);
 			pstmt.setString(3, schedule_opponent);
-			pstmt.setString(4, schedule_date);
-			pstmt.setString(5, schedule_time);
+			
 			
 			return pstmt.executeUpdate(); //return 1;
 		}catch (Exception e) {
@@ -38,9 +37,9 @@ public class ScheduleDAO {
 		return -1;
 	}
 
-	public ArrayList<String> dupCheck(String schedule_opponent){
+	public ArrayList<String> scheduleCheck(String schedule_opponent){
 		ArrayList<String> list = new ArrayList<String>();
-		String SQL = "select game_date, game_time from game inner join schedule on game_id=schedule_game where schedule.schedule_opponent=?";
+		String SQL = "select game_date from game inner join schedule on game_id=schedule_game where schedule.schedule_opponent=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -51,8 +50,7 @@ public class ScheduleDAO {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				String game_date = rs.getString("game_date");
-				String game_time = rs.getString("game_time");
-				list.add(game_date+game_time);
+				list.add(game_date);
 				
 			}
 		}catch (Exception e) {
@@ -65,4 +63,5 @@ public class ScheduleDAO {
 		
 		return list;
 	}
+
 }

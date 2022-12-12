@@ -9,6 +9,9 @@
 <body>
 <%
 	String msg = (String)request.getAttribute("msg");
+	String game_region = (String)request.getAttribute("game_region");
+	String game_date = (String)request.getAttribute("game_date");
+	//System.out.println(game_region+" " + game_date);
 %>
 
 	<script type="text/javascript">
