@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,6 +55,7 @@
           				<ul class="dropdown-menu">
             				<li><a class="dropdown-item" href="gameRegist.jsp">game 등록</a></li>
             				<li><a class="dropdown-item" href="gameList.jsp">game 찾기</a></li>
+            				<li><a class="dropdown-item" href="myGame.jsp">내 Game</a></li>
           				</ul>
         			</li>
         			<li class="nav-item dropdown">
@@ -61,8 +64,12 @@
           				</a>
           				<ul class="dropdown-menu">
             				<li><a class="dropdown-item" href="join.jsp">회원가입</a></li>
+            				<c:if test="${user_id==null }">
             				<li><a class="dropdown-item" href="login.jsp">로그인</a></li>
-            				<li><a class="dropdown-item" href="logout.jsp">로그아웃</a></li>
+            				</c:if>
+            				<c:if test="${user_id!=null }">
+            				<li><a class="dropdown-item" href="LogoutAction.do">로그아웃</a></li>
+            				</c:if>
           				</ul>
         			</li>
       			</ul>

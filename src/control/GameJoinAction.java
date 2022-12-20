@@ -84,15 +84,14 @@ public class GameJoinAction extends HttpServlet {
 					RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
 					dis.forward(request, response);
 					return;
-				}else {
-					gameDAO.matchUpdate(schedule_game);
-					scheduleDAO.match(schedule_game, schedule_writer, schedule_opponent);
-					request.setAttribute("msg","등록이 완료되었습니다. 리스트를 확인하세요!");
-					RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
-					dis.forward(request, response);
-					return;
 				}
 			}
+			gameDAO.matchUpdate(schedule_game);
+			scheduleDAO.match(schedule_game, schedule_writer, schedule_opponent);
+			request.setAttribute("msg","등록이 완료되었습니다. 리스트를 확인하세요!");
+			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+			dis.forward(request, response);
+			return;
 		}else {
 			for(String i : registCheck) {
 				System.out.println(i);
@@ -124,7 +123,7 @@ public class GameJoinAction extends HttpServlet {
 			gameDAO.matchUpdate(schedule_game);
 			scheduleDAO.match(schedule_game, schedule_writer, schedule_opponent);
 			request.setAttribute("msg","등록이 완료되었습니다. 리스트를 확인하세요!");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameJoinSuccess.jsp");
 			dis.forward(request, response);
 			return;
 			

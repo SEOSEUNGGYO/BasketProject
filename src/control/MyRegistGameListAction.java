@@ -14,11 +14,11 @@ import javax.servlet.http.HttpSession;
 import game.GameDAO;
 import game.GameDTO;
 
-
-@SuppressWarnings("serial")
-@WebServlet("/GameListAction.do")
-public class GameListAction extends HttpServlet {
-	
+/**
+ * Servlet implementation class MyJoinGameListAction
+ */
+@WebServlet("/MyRegistGameListAction.do")
+public class MyRegistGameListAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		rePro(request, response);
 	}
@@ -30,34 +30,9 @@ public class GameListAction extends HttpServlet {
 	}
 	
 	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		
-		String game_region = request.getParameter("game_region");
-		String game_date = request.getParameter("game_date");
-		
-//		session.setAttribute("game_region", game_region);
-//		session.setAttribute("game_date", game_date);
-		
-		//String game_region = (String)session.getAttribute("game_region");
-		//String game_date = (String)session.getAttribute("game_date");
-		
-		
-		
-		if(game_region==null||game_region.equals("")) {
-			request.setAttribute("msg"," 입력하지않은 정보가 있습니다. ");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameListError.jsp");
-			dis.forward(request, response);
-			return;
-		}
-		if(game_date==null||game_date.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameListError.jsp");
-			dis.forward(request, response);
-			return;
-		}
-		
+		String game_writer = (String)session.getAttribute("user_id");
 		
 		
 		int pageSize=10;
@@ -77,33 +52,22 @@ public class GameListAction extends HttpServlet {
 				
 		//현재 보여지고 있는 페이지 문자를 숫자로 변환 
 		int currentPage =Integer.parseInt(pageNum);
-				
-		
-				
-		//현재 보여질 페이지 시작 번호를 설정 
 		int start = (currentPage-1)*pageSize+1;
 		int end =currentPage * pageSize;
 		
-		//전체 게시글의 갯수를 가져와야 하기에 데이터 베이스 객체 생성
 		GameDAO gameDAO = new GameDAO();
-		count = gameDAO.getGameCount(game_region,game_date);
-		//최신글 10개를 기준으로 게시글 리턴 받아주는 메소드 호출 
-		ArrayList<GameDTO> gameList = gameDAO.getgGmeList(game_region, game_date, start, end);
+		ArrayList<GameDTO> myRegistGameList = gameDAO.getMyGameList(game_writer, start, end);
+		count = gameDAO.getMyGameCount(game_writer);
 		number = count - (currentPage -1)*pageSize;
+		System.out.println(myRegistGameList);
 		
-		String msg =request.getParameter("msg");
-		////////////////////////////////////////////BoardList.jsp쪽으로 request객체에 담아서 넘겨줌
-
-		request.setAttribute("gameList", gameList );
+		request.setAttribute("myRegistGameList", myRegistGameList );
 		request.setAttribute("number",number);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("count", count);
 		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("msg", msg);
-		
-		System.out.println(gameList);
-		
-		RequestDispatcher dis = request.getRequestDispatcher("/gameList.jsp");
+		request.setAttribute("game_writer", game_writer);
+		RequestDispatcher dis = request.getRequestDispatcher("/myGame.jsp");
 		dis.forward(request, response);
 		return;
 	}

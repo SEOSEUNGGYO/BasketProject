@@ -53,6 +53,7 @@
           				<ul class="dropdown-menu">
             				<li><a class="dropdown-item" href="gameRegist.jsp">game 등록</a></li>
             				<li><a class="dropdown-item" href="gameList.jsp">game 찾기</a></li>
+            				<li><a class="dropdown-item" href="myGame.jsp">내 Game</a></li>
           				</ul>
         			</li>
         			<li class="nav-item dropdown">

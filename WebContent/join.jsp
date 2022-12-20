@@ -34,6 +34,9 @@
           				<a class="nav-link" href="nba.jsp">NBA-Talk</a>
         			
         			</li>
+        			<li class="nav-item">
+          				<a class="nav-link" href="free.jsp">Free-Talk</a>
+        			</li>
         			<li class="nav-item dropdown">
           				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             				Court-Info
@@ -50,6 +53,7 @@
           				<ul class="dropdown-menu">
             				<li><a class="dropdown-item" href="gameRegist.jsp">game 등록</a></li>
             				<li><a class="dropdown-item" href="gameList.jsp">game 찾기</a></li>
+            				<li><a class="dropdown-item" href="myGame.jsp">내 Game</a></li>
           				</ul>
         			</li>
         			<li class="nav-item dropdown">
