@@ -24,7 +24,7 @@ public class LogoutAction extends HttpServlet {
 		rePro(request, response);
 	}
 
-protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();

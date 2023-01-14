@@ -32,28 +32,21 @@ public class GameListAction extends HttpServlet {
 	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
+	
 		
 		String game_region = request.getParameter("game_region");
 		String game_date = request.getParameter("game_date");
-		
-//		session.setAttribute("game_region", game_region);
-//		session.setAttribute("game_date", game_date);
-		
-		//String game_region = (String)session.getAttribute("game_region");
-		//String game_date = (String)session.getAttribute("game_date");
-		
-		
+
 		
 		if(game_region==null||game_region.equals("")) {
-			request.setAttribute("msg"," 입력하지않은 정보가 있습니다. ");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameListError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(game_date==null||game_date.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameListError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
@@ -101,7 +94,6 @@ public class GameListAction extends HttpServlet {
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("msg", msg);
 		
-		System.out.println(gameList);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("/gameList.jsp");
 		dis.forward(request, response);

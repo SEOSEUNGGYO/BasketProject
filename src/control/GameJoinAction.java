@@ -39,14 +39,14 @@ public class GameJoinAction extends HttpServlet {
 		String schedule_writer = request.getParameter("game_writer");
 		
 		if(schedule_game==0) {
-			request.setAttribute("msg"," 입력하지않은 정보가 있습니다. ");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(schedule_writer==null||schedule_writer.equals("")) {
-			request.setAttribute("msg"," 입력하지않은 정보가 있습니다. ");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
@@ -56,8 +56,8 @@ public class GameJoinAction extends HttpServlet {
 		schedule_opponent = (String)session.getAttribute("user_id");
 		
 		if(schedule_opponent==null || schedule_opponent.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/login.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
@@ -68,28 +68,26 @@ public class GameJoinAction extends HttpServlet {
 		ArrayList<String> scheduleCheck = scheduleDAO.scheduleCheck(schedule_opponent);
 		ArrayList<String> registCheck = gameDAO.registCheck(schedule_opponent);
 		
-		System.out.println(scheduleCheck);
+		
 		if(scheduleCheck.isEmpty()) {
 			for(String i : registCheck) {
-				System.out.println(i);
-				System.out.println(registCheck);
 				if(schedule_writer.equals(schedule_opponent)){
-					request.setAttribute("msg","본인이 만든 일정에는 참여할 수 없습니다!!");
-					RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+					request.setAttribute("msg","NoMyGame");//내가만든일정에는참여불가
+					RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 					dis.forward(request, response);
 					return;
 				}
 				if(i.equals(schedule_date)) {
-					request.setAttribute("msg","해당 날짜에 이미 생성중인 일정이 있습니다!!!");
-					RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+					request.setAttribute("msg","MyGameExist");//해당날짜에이미생성중인게임이있음
+					RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 					dis.forward(request, response);
 					return;
 				}
 			}
 			gameDAO.matchUpdate(schedule_game);
 			scheduleDAO.match(schedule_game, schedule_writer, schedule_opponent);
-			request.setAttribute("msg","등록이 완료되었습니다. 리스트를 확인하세요!");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+			request.setAttribute("msg","GameJoinSucess!");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}else {
@@ -97,24 +95,22 @@ public class GameJoinAction extends HttpServlet {
 				System.out.println(i);
 				System.out.println(registCheck);
 				if(schedule_writer.equals(schedule_opponent)){
-					request.setAttribute("msg","본인이 만든 일정에는 참여할 수 없습니다!!");
-					RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+					request.setAttribute("msg","NoMyGame");//내가만든일정에는참여불가
+					RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 					dis.forward(request, response);
 					return;
 				}
 				if(i.equals(schedule_date)) {
-					request.setAttribute("msg","해당 날짜에 이미 생성중인 일정이 있습니다!!!");
-					RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+					request.setAttribute("msg","MyGameExist");//해당날짜에이미생성중인게임이있음
+					RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 					dis.forward(request, response);
 					return;
 				}
 			}
 			for(String i : scheduleCheck) {
-				System.out.println(i);
-				System.out.println(schedule_date);
 				if(i.equals(schedule_date)) {
-					request.setAttribute("msg","해당 날짜와 시간에 이미 참여한 일정이 있습니다!!!");
-					RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+					request.setAttribute("msg","MyScheduleExist");//해당날짜에참옂우인일정있음
+					RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 					dis.forward(request, response);
 					return;
 				}
@@ -122,8 +118,8 @@ public class GameJoinAction extends HttpServlet {
 			
 			gameDAO.matchUpdate(schedule_game);
 			scheduleDAO.match(schedule_game, schedule_writer, schedule_opponent);
-			request.setAttribute("msg","등록이 완료되었습니다. 리스트를 확인하세요!");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameJoinSuccess.jsp");
+			request.setAttribute("msg","GameJoinSucess");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 			

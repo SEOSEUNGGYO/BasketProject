@@ -60,7 +60,6 @@ public class MyJoinGameListAction extends HttpServlet {
 		count = scheduleDAO.getMyJoinGameCount(schedule_opponent);
 		ArrayList<GameDTO> myJoinGameList = scheduleDAO.getMyJoinGameList(schedule_opponent, start, end);
 		number = count - (currentPage -1)*pageSize;
-		System.out.println(myJoinGameList);
 		
 		request.setAttribute("myJoinGameList", myJoinGameList );
 		request.setAttribute("number",number);

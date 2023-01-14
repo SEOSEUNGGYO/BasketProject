@@ -44,44 +44,44 @@ public class GameRegistAction extends HttpServlet {
 		
 
 		if(game_region==null||game_region.equals("")) {
-			request.setAttribute("msg"," 입력하지않은 정보가 있습니다. ");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(game_date==null||game_date.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(game_time==null||game_time.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(game_rule==null||game_rule.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(game_address==null||game_address.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(game_court==null||game_court.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(game_information==null||game_information.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
@@ -105,36 +105,32 @@ public class GameRegistAction extends HttpServlet {
 		if(registCheck.isEmpty()) {
 			int result = gameDAO.regist(game_region, game_date, game_time, game_rule, game_address, game_court, game_information, game_writer);
 			if(result==1) {
-				request.setAttribute("msg","등록이 완료되었습니다. 리스트를 확인하세요!");
-				RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+				request.setAttribute("msg","GameRegistSuccess");
+				RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 				dis.forward(request, response);
 				return;
 			}
 		}else {
 			for(String i : registCheck) {
-				System.out.println(i);
-				System.out.println(registCheck);
 				if(i.equals(game_date)) {
-					request.setAttribute("msg","해당 날짜에 이미 생성중인 일정이 있습니다!!!");
-					RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+					request.setAttribute("msg","MyGameExist");//해당날짜에이미생성중인게임이있음
+					RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 					dis.forward(request, response);
 					return;
 				}
 			}
 			for(String i : scheduleCheck) {
-				System.out.println(i);
-				System.out.println(scheduleCheck);
 				if(i.equals(game_date)) {
-					request.setAttribute("msg","해당 날짜에 이미 참여한 일정이 있습니다!!!");
-					RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+					request.setAttribute("msg","MyScheduleExist");//해당날짜에참옂우인일정있음
+					RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 					dis.forward(request, response);
 					return;
 				}
 			}
 			int result = gameDAO.regist(game_region, game_date, game_time, game_rule, game_address, game_court, game_information, game_writer);
 			if(result==1) {
-				request.setAttribute("msg","등록이 완료되었습니다. 리스트를 확인하세요!");
-				RequestDispatcher dis = request.getRequestDispatcher("/soe/gameRegistSuccess.jsp");
+				request.setAttribute("msg","GameRegistSuccess");
+				RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 				dis.forward(request, response);
 				return;
 			}

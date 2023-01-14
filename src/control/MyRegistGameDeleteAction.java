@@ -33,8 +33,8 @@ public class MyRegistGameDeleteAction extends HttpServlet {
 		GameDAO gameDAO = new GameDAO();
 		gameDAO.matchDelete(game_id);
 		
-		request.setAttribute("msg","삭제 완료.");
-		RequestDispatcher dis = request.getRequestDispatcher("/soe/gameDeleteSuccess.jsp");
+		request.setAttribute("msg","Delete");
+		RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 		dis.forward(request, response);
 		return;
 		

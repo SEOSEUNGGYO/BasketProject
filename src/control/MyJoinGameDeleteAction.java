@@ -36,8 +36,8 @@ public class MyJoinGameDeleteAction extends HttpServlet {
 		gameDAO.matchReUpdate(schedule_game);
 		scheduleDAO.scheduleDelete(schedule_game);
 		
-		request.setAttribute("msg","삭제 완료.");
-		RequestDispatcher dis = request.getRequestDispatcher("/soe/gameDeleteSuccess.jsp");
+		request.setAttribute("msg","Delete");
+		RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 		dis.forward(request, response);
 		return;
 		

@@ -42,38 +42,38 @@ public class JoinAction extends HttpServlet {
 		
 		
 		if(user_id==null||user_id.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/JoinError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(user_password==null||user_password.equals("")) {
-			request.setAttribute("msg"," 입력하지않은 정보가 있습니다. ");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/JoinError.jsp");
+			request.setAttribute("msg"," NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(user_email==null||user_email.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/JoinError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(user_phone==null||user_phone.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/JoinError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(user_name==null||user_name.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/JoinError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(user_birth==null||user_birth.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/JoinError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
@@ -84,13 +84,13 @@ public class JoinAction extends HttpServlet {
 		int result = userDAO.join(userDTO);
 		
 		if(result==1) {
-			request.setAttribute("msg","회원가입 되었습니다!");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/JoinSuccess.jsp");
+			request.setAttribute("msg","JoinSuccess");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}else {
-			request.setAttribute("msg","회원가입 실패!!");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/JoinError.jsp");
+			request.setAttribute("msg","JoinFail");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}

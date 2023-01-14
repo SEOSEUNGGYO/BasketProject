@@ -59,7 +59,6 @@ public class MyRegistGameListAction extends HttpServlet {
 		ArrayList<GameDTO> myRegistGameList = gameDAO.getMyGameList(game_writer, start, end);
 		count = gameDAO.getMyGameCount(game_writer);
 		number = count - (currentPage -1)*pageSize;
-		System.out.println(myRegistGameList);
 		
 		request.setAttribute("myRegistGameList", myRegistGameList );
 		request.setAttribute("number",number);

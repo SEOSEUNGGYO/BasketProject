@@ -24,30 +24,7 @@
 		</button>
 	    	<div class="collapse navbar-collapse" id="navbarSupportedContent">
       			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        			<li class="nav-item">
-          				<a class="nav-link" href="notice.jsp">Notice</a>
-        			</li>
         			
-        			<li class="nav-item">
-          				<a class="nav-link" href="kbl.jsp">KBL-Talk</a>
-        			
-        			</li>
-        			<li class="nav-item">
-          				<a class="nav-link" href="nba.jsp">NBA-Talk</a>
-        			
-        			</li>
-        			<li class="nav-item">
-          				<a class="nav-link" href="free.jsp">Free-Talk</a>
-        			</li>
-        			<li class="nav-item dropdown">
-          				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            				Court-Info
-          				</a>
-          				<ul class="dropdown-menu">
-            				<li><a class="dropdown-item" href="outdoor.jsp">Outdoor court</a></li>
-            				<li><a class="dropdown-item" href="indoor.jsp">Indoor Court</a></li>
-          				</ul>
-        			</li>
         			<li class="nav-item dropdown">
           				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             				game

@@ -39,14 +39,14 @@ public class LoginAction extends HttpServlet {
 		
 		
 		if(user_id==null||user_id.equals("")) {
-			request.setAttribute("msg","입력하지않은 정보가 있습니다.");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/LoginError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
 		if(user_password==null||user_password.equals("")) {
-			request.setAttribute("msg","패스워드가 일치하지 않습니다");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/LoginError.jsp");
+			request.setAttribute("msg","NotInsert");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}
@@ -57,20 +57,20 @@ public class LoginAction extends HttpServlet {
 		int result = userDAO.login(user_id,user_password);
 		
 		if(result==1) {
-			request.setAttribute("msg","로그인 되었습니다!");
+			request.setAttribute("msg","LoginSuccess");
 			HttpSession session = request.getSession();
 			session.setAttribute("user_id", user_id);
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/LoginSuccess.jsp");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}else if(result==-1) {
-			request.setAttribute("msg","비밀번호 틀렸습니다!");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/LoginError.jsp");
+			request.setAttribute("msg","PWIncorrect");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}else if(result==0) {
-			request.setAttribute("msg","없는 ID입니다 회원가입을 먼저 진행하세요!!");
-			RequestDispatcher dis = request.getRequestDispatcher("/soe/LoginError.jsp");
+			request.setAttribute("msg","NoID");
+			RequestDispatcher dis = request.getRequestDispatcher("process.jsp");
 			dis.forward(request, response);
 			return;
 		}

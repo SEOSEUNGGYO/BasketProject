@@ -24,30 +24,7 @@
 		</button>
 	    	<div class="collapse navbar-collapse" id="navbarSupportedContent">
       			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        			<li class="nav-item">
-          				<a class="nav-link" href="notice.jsp">Notice</a>
-        			</li>
         			
-        			<li class="nav-item">
-          				<a class="nav-link" href="kbl.jsp">KBL-Talk</a>
-        			
-        			</li>
-        			<li class="nav-item">
-          				<a class="nav-link" href="nba.jsp">NBA-Talk</a>
-        			
-        			</li>
-        			<li class="nav-item">
-          				<a class="nav-link" href="free.jsp">Free-Talk</a>
-        			</li>
-        			<li class="nav-item dropdown">
-          				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            				Court-Info
-          				</a>
-          				<ul class="dropdown-menu">
-            				<li><a class="dropdown-item" href="outdoor.jsp">Outdoor court</a></li>
-            				<li><a class="dropdown-item" href="indoor.jsp">Indoor Court</a></li>
-          				</ul>
-        			</li>
         			<li class="nav-item dropdown">
           				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             				game
@@ -64,15 +41,18 @@
           				</a>
           				<ul class="dropdown-menu">
             				<li><a class="dropdown-item" href="join.jsp">회원가입</a></li>
+            				<c:if test="${user_id==null }">
             				<li><a class="dropdown-item" href="login.jsp">로그인</a></li>
-            				<li><a class="dropdown-item" href="logout.jsp">로그아웃</a></li>
+            				</c:if>
+            				<c:if test="${user_id!=null }">
+            				<li><a class="dropdown-item" href="LogoutAction.do">로그아웃</a></li>
+            				</c:if>
           				</ul>
         			</li>
       			</ul>
     		</div>
   	</div>
 </nav>
-
 
 <div class="wrap" id="wrap">
 	<div class="container-fluid" id="main">
@@ -144,6 +124,7 @@
    					<div class="col-12" id="col">
    						<label for="game_information" class="form-label">기타</label>
    						<p id="game_information">${gameList.game_information}</p>
+   						<p id="game_information">${gameList.game_writer}</p>
    					</div>
    					<div class="col-12" id="col">
    						<label for="game_writer" class="form-label">작성자</label>

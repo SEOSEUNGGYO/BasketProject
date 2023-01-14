@@ -17,59 +17,42 @@
 <nav class="navbar navbar-expand-lg bg-light">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="index.jsp">
-			<img src="./image/ball_img.png" width="30" height="24">
+		<img src="./image/ball_img.png" width="30" height="24">
 		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      		<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        		<li class="nav-item">
-          			<a class="nav-link" href="notice.jsp">Notice</a>
-        		</li>
-        		<li class="nav-item">
-          			<a class="nav-link" href="kbl.jsp">KBL-Talk</a>
-        		</li>
-        		<li class="nav-item">
-          			<a class="nav-link" href="nba.jsp">NBA-Talk</a>
-        		</li>
-        		<li class="nav-item">
-          			<a class="nav-link" href="free.jsp">Free-Talk</a>
-        		</li>
-        		<li class="nav-item dropdown">
-          			<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            			Court-Info
-          			</a>
-          			<ul class="dropdown-menu">
-            			<li><a class="dropdown-item" href="outdoor.jsp">Outdoor court</a></li>
-            			<li><a class="dropdown-item" href="indoor.jsp">Indoor Court</a></li>
-          			</ul>
-        		</li>
-        		<li class="nav-item dropdown">
-          			<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            			game
-          			</a>
-          			<ul class="dropdown-menu">
-            			<li><a class="dropdown-item" href="gameRegist.jsp">game 등록</a></li>
-            			<li><a class="dropdown-item" href="gameList.jsp">game 찾기</a></li>
-            			<li><a class="dropdown-item" href="myGame.jsp">내 Game</a></li>
-          			</ul>
-        		</li>
-        		<li class="nav-item dropdown">
-          			<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            			More
-          			</a>
-          			<ul class="dropdown-menu">
-            			<li><a class="dropdown-item" href="join.jsp">회원가입</a></li>
-            			<li><a class="dropdown-item" href="login.jsp">로그인</a></li>
-            			<li><a class="dropdown-item" href="logout.jsp">로그아웃</a></li>
-          			</ul>
-        		</li>
-      		</ul>
-    	</div>
+	    	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+      			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        			
+        			<li class="nav-item dropdown">
+          				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            				game
+          				</a>
+          				<ul class="dropdown-menu">
+            				<li><a class="dropdown-item" href="gameRegist.jsp">game 등록</a></li>
+            				<li><a class="dropdown-item" href="gameList.jsp">game 찾기</a></li>
+            				<li><a class="dropdown-item" href="myGame.jsp">내 Game</a></li>
+          				</ul>
+        			</li>
+        			<li class="nav-item dropdown">
+          				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            				More
+          				</a>
+          				<ul class="dropdown-menu">
+            				<li><a class="dropdown-item" href="join.jsp">회원가입</a></li>
+            				<c:if test="${user_id==null }">
+            				<li><a class="dropdown-item" href="login.jsp">로그인</a></li>
+            				</c:if>
+            				<c:if test="${user_id!=null }">
+            				<li><a class="dropdown-item" href="LogoutAction.do">로그아웃</a></li>
+            				</c:if>
+          				</ul>
+        			</li>
+      			</ul>
+    		</div>
   	</div>
 </nav>
-
 
 <div class="wrap" id="wrap">
 	<div class="container-fluid" id="main">
